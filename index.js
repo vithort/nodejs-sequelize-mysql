@@ -1,10 +1,10 @@
 (async () => {
   const database = require('./db');
-  const Produto = require('./produto');
+  const Produto = require('./models/produto');
   try {
     const resultado = await database.sync();
     console.log(resultado);
-    
+
     // CRUD: Create
     const resultadoCreate = await Produto.create({
       nome: 'mouse',
@@ -12,29 +12,29 @@
       descricao: 'Um mouse USB bonitão',
     });
     console.log(resultadoCreate);
-   
+
     // CRUD: Read
     const produtos = await Produto.findAll();
     console.log(produtos);
 
-    const produto = await Produto.findByPk(1);
-    console.log(produto);
+    const produto1 = await Produto.findByPk(1);
+    console.log(produto1);
 
     // CRUD: Update
-    produto = await Produto.findByPk(1);
-    console.log(produto);
-    produto.nome = 'Mouse Top';
+    const produto2 = await Produto.findByPk(1);
+    console.log(produto2);
+    produto2.nome = 'Mouse Top';
 
     const resultadoSave = await produto.save();
     console.log(resultadoSave);
-    
+
     // CRUD: Delete
     // assim
     Produto.destroy({ where: { id: 1 } });
 
     // ou assim
-    produto = await Produto.findByPk(1);
-    produto.destroy();
+    produto3 = await Produto.findByPk(1);
+    produto3.destroy();
   } catch (error) {
     console.log(error);
   }
